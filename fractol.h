@@ -6,7 +6,7 @@
 /*   By: yelousse <yelousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 02:07:04 by yelousse          #+#    #+#             */
-/*   Updated: 2022/07/23 21:50:23 by yelousse         ###   ########.fr       */
+/*   Updated: 2022/07/24 20:30:50 by yelousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define FRACTOL_H
 
 # include <mlx.h>
-#include <stdio.h>
+# include <stdio.h>
+# include <stdlib.h>
 
 #define W 800
 #define H 800

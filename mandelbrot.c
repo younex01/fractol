@@ -6,7 +6,7 @@
 /*   By: yelousse <yelousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 16:10:51 by yelousse          #+#    #+#             */
-/*   Updated: 2022/07/23 21:52:56 by yelousse         ###   ########.fr       */
+/*   Updated: 2022/07/24 22:53:54 by yelousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void ft_mandelbrot(int x, int y, t_mlx *move)
 	t_complex c, z, t;
 
 	it = 1;
-	c.r= move->re_min + x / (double)W * (move->re_max - move->re_min);
-	c.i = move->im_min + y / (double)W * (move->im_max - move->im_min);
+	c.r= move->re_min + (x + move->lr) / (double)W * (move->re_max - move->re_min);
+	c.i = move->im_min + (y + move->ud) / (double)W * (move->im_max - move->im_min);
 	z.r = 0.0;
 	z.i = 0.0;
 	t = z;
@@ -31,7 +31,7 @@ void ft_mandelbrot(int x, int y, t_mlx *move)
 		it++;
 	}
 	if (it == MAX_IT)
-		move->img_str[(y + move->ud) * W + (x + move->lr)] = 0x000000;
+		move->img_str[y * W + x ] = 0x000000;
 	else
-		move->img_str[(y + move->ud) * W + (x + move->lr)] = 0x050000 * it;
+		move->img_str[y * W + x ] = 0x050000 * it;
 }

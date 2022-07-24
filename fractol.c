@@ -6,7 +6,7 @@
 /*   By: yelousse <yelousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 02:06:24 by yelousse          #+#    #+#             */
-/*   Updated: 2022/07/23 19:11:55 by yelousse         ###   ########.fr       */
+/*   Updated: 2022/07/24 22:11:33 by yelousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,32 @@ int		mouse_press(int button, int x, int y, t_mlx *move)
 }
 
 
+int		keypress(int keycode, t_mlx *move)
+{
+	if (keycode == 53 && move)
+	{
+		system("clear");
+		exit(0);
+	}
+	if (keycode == 123)
+		move->lr = move->lr - 10;
+	if (keycode == 124)
+		move->lr = move->lr + 10;
+	if (keycode == 125)
+		move->ud = move->ud + 10;
+	if (keycode == 126)
+		move->ud = move->ud - 10;
+	ft_draw(move, move->f);
+	return (0);
+}
+
+int close(void *param)
+{
+	(void)param;
+	exit(0);
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	t_mlx  move;
@@ -85,5 +111,7 @@ int	main(int ac, char **av)
 	move.img_str = (int*)mlx_get_data_addr(move.img_ptr, &(move.bpp), &(move.l), &(move.endian));
 	ft_draw(&move, move.f);
 	mlx_hook(move.win_ptr, 4, 0, mouse_press, &move);
+	mlx_hook(move.win_ptr, 17, 0, close, (void *)&move);
+	mlx_hook(move.win_ptr, 2, 0, keypress, (void *)&move);
 	mlx_loop(move.mlx_ptr);
 }
