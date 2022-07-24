@@ -6,7 +6,7 @@
 /*   By: yelousse <yelousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 02:06:24 by yelousse          #+#    #+#             */
-/*   Updated: 2022/07/24 22:11:33 by yelousse         ###   ########.fr       */
+/*   Updated: 2022/07/24 23:44:18 by yelousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	ft_draw(t_mlx *move, char *f)
                 ft_mandelbrot(j, i, move);
             if (*f == 'j')
 			    ft_julia(j, i, move);
-            // if (f == 'b')
-			//     ft_burning_ship(j, i, move);
+            if (*f == 'b')
+			    ft_burningship(j, i, move);
 			j++;
 		}
 	i++;

@@ -1,5 +1,5 @@
 NAME = fractol
-SRC = fractol.c mandelbrot.c julia.c
+SRC = fractol.c mandelbrot.c julia.c burning_ship.c
 OBJ = ${SRC:.c=.o}
 FLAGS = -Wall -Wextra -Werror
 FLAGS2 = -lmlx -framework OpenGL -framework AppKit

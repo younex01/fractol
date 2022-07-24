@@ -6,7 +6,7 @@
 /*   By: yelousse <yelousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 02:07:04 by yelousse          #+#    #+#             */
-/*   Updated: 2022/07/24 20:30:50 by yelousse         ###   ########.fr       */
+/*   Updated: 2022/07/24 23:45:10 by yelousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <mlx.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <math.h>
 
 #define W 800
 #define H 800
@@ -66,5 +67,6 @@ typedef		struct s_mlx
 
 void ft_mandelbrot(int x, int y, t_mlx *move);
 void ft_julia(int x, int y, t_mlx *move);
+void ft_burningship(int x, int y, t_mlx *move);
 
 #endif
