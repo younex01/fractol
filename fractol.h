@@ -6,7 +6,7 @@
 /*   By: yelousse <yelousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 02:07:04 by yelousse          #+#    #+#             */
-/*   Updated: 2022/07/24 23:45:10 by yelousse         ###   ########.fr       */
+/*   Updated: 2022/08/03 15:19:09 by yelousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 #define W 800
 #define H 800
-#define MAX_IT 100
+#define MAX_IT 50
 
 typedef struct s_complex
 {
@@ -68,5 +68,9 @@ typedef		struct s_mlx
 void ft_mandelbrot(int x, int y, t_mlx *move);
 void ft_julia(int x, int y, t_mlx *move);
 void ft_burningship(int x, int y, t_mlx *move);
+void ft_sierpinski(int x, int y, t_mlx *move);
+void ft_tricorn(int x, int y, t_mlx *move);
+int		mouse_move(int x, int y, t_mlx *move);
+void	ft_draw(t_mlx *move, char *f);
 
 #endif

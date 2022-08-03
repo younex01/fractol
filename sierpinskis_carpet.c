@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   burning_ship.c                                     :+:      :+:    :+:   */
+/*   sierpinskis_carpet.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yelousse <yelousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/24 23:37:31 by yelousse          #+#    #+#             */
-/*   Updated: 2022/07/25 19:14:22 by yelousse         ###   ########.fr       */
+/*   Created: 2022/07/26 23:21:32 by yelousse          #+#    #+#             */
+/*   Updated: 2022/07/26 23:31:16 by yelousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void ft_burningship(int x, int y, t_mlx *move)
+void ft_sierpinski(int x, int y, t_mlx *move)
 {
 	int it;
 	t_complex c, z, t;
@@ -23,11 +23,12 @@ void ft_burningship(int x, int y, t_mlx *move)
 	z.r = 0.0;
 	z.i = 0.0;
 	t = z;
-	while (z.r * z.r + z.i * z.i < 4 && it < MAX_IT)
+	while (it < MAX_IT)
 	{
-		t.r = (z.r * z.r - z.i * z.i + c.r);
-		t.i = (2 * fabs(z.r * z.i) + c.i);
-		z = t;
+        if ((int)c.r % 3 == 1 && (int)c.i % 3 == 1)
+            break;
+		c.r *= 3;
+		c.i *= 3;
 		it++;
 	}
 	if (it == MAX_IT)
