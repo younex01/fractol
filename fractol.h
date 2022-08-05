@@ -6,7 +6,7 @@
 /*   By: yelousse <yelousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 02:07:04 by yelousse          #+#    #+#             */
-/*   Updated: 2022/08/03 15:19:09 by yelousse         ###   ########.fr       */
+/*   Updated: 2022/08/05 00:28:50 by yelousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@
 #define W 800
 #define H 800
 #define MAX_IT 50
+
+typedef	struct s_color
+{
+	int color;
+}	t_color;
 
 typedef struct s_complex
 {
@@ -62,15 +67,26 @@ typedef		struct s_mlx
 	double im_min;
 	double im_max;
 	char	*f;
+	int 	change;
+	int		i;
+	int 	max_it;
 }t_mlx;
 
 
 void ft_mandelbrot(int x, int y, t_mlx *move);
-void ft_julia(int x, int y, t_mlx *move);
+void ft_julia_11(int x, int y, t_mlx *move);
+void ft_julia_22(int x, int y, t_mlx *move);
+void ft_julia_33(int x, int y, t_mlx *move);
+void ft_julia_44(int x, int y, t_mlx *move);
 void ft_burningship(int x, int y, t_mlx *move);
 void ft_sierpinski(int x, int y, t_mlx *move);
 void ft_tricorn(int x, int y, t_mlx *move);
 int		mouse_move(int x, int y, t_mlx *move);
 void	ft_draw(t_mlx *move, char *f);
+
+void ft_mandelbrot_bonus(int x, int y, t_mlx *move);
+void ft_julia_bonus(int x, int y, t_mlx *move);
+void ft_burningship_bonus(int x, int y, t_mlx *move);
+void ft_tricorn_bonus(int x, int y, t_mlx *move);
 
 #endif

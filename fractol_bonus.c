@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.c                                          :+:      :+:    :+:   */
+/*   fractol_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yelousse <yelousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 02:06:24 by yelousse          #+#    #+#             */
-/*   Updated: 2022/08/05 16:43:11 by yelousse         ###   ########.fr       */
+/*   Updated: 2022/08/05 16:42:48 by yelousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,13 @@ void	ft_draw(t_mlx *move, char *f)
 		while (j < W)
 		{
             if (*f == 'm')
-                ft_mandelbrot(j, i, move);
+                ft_mandelbrot_bonus(j, i, move);
             if (*f == 'j')
-			    ft_julia_11(j, i, move);
-			if (*f == 'k')
-			    ft_julia_22(j, i, move);
-			if (*f == 'l')
-			    ft_julia_33(j, i, move);
-			 if (*f == 'h')
-			    ft_julia_44(j, i, move);
+			    ft_julia_bonus(j, i, move);
             if (*f == 'b')
-			    ft_burningship(j, i, move);
+			    ft_burningship_bonus(j, i, move);
+			if (*f == 't')	
+				ft_tricorn_bonus(j, i, move);
 			j++;
 		}
 	i++;
@@ -73,7 +69,7 @@ int		mouse_press(int button, int x, int y, t_mlx *move)
 
 void	change_color(t_mlx *move)
 {
-	int	color[] = {0xff0401, 0xFF0800,0xA0F00F, 0x001100, 0xcbcfd3, 0xfafbff, 0x9, 0x020202, 0x050000,4147,265};
+	int	color[] = {0xFF0800,0xA0F00F,265,4147, 0xff0401, 0x001100, 0xcbcfd3, 0xfafbff, 0x9, 0x020202, 0x050000};
 	move->change = color[move->i];
 	move->i++;
 	if (move->i == 10)
@@ -136,14 +132,15 @@ int	main(int ac, char **av)
 
 	if (ac == 1 || ac > 2)
 	{
-		printf("only available parameters : mandelbrot (m) julia (h) (j) (k) (l) burning_ship (b)\n");
+		printf("only available parameters : (m) (j) (b)\n");
 		exit(0);
 	}
-	if ((av[1][0] != 'm' && av[1][0] != 'j' && av[1][0] != 'b' && av[1][0] != 'h' && av[1][0] != 'k' && av[1][0] != 'l')|| av[1][1] != '\0')
+	if ((av[1][0] != 'm' && av[1][0] != 'j' && av[1][0] != 'b' && av[1][0] != 't' )|| av[1][1] != '\0')
 	{
-		printf("only available parameters : mandelbrot (m) julia (h) (j) (k) (l) burning_ship (b)\n");
+		printf("only available parameters : mandelbrot(m) julia(j) burning ship(b) tricorn(t)\n");
 		exit(0);
 	}
+	
 	move.max_it = 50;
 	move.ud = 0;
 	move.lr = 0;
@@ -157,11 +154,11 @@ int	main(int ac, char **av)
 	move.win_ptr = mlx_new_window(move.mlx_ptr, 800, 800, "fractol");
 	move.img_ptr = mlx_new_image(move.mlx_ptr, 800, 800);
 	move.img_str = (int*)mlx_get_data_addr(move.img_ptr, &(move.bpp), &(move.l), &(move.endian));
-	move.change = 265;
+	move.change = 4147;
 	move.i = 0;
 	ft_draw(&move, move.f);
 	mlx_hook(move.win_ptr, 4, 0, mouse_press, &move);
-	//mlx_hook(move.win_ptr, 6, 0, mouse_move, &move);
+	mlx_hook(move.win_ptr, 6, 0, mouse_move, &move);
 	mlx_hook(move.win_ptr, 17, 0, close, (void *)&move);
 	mlx_hook(move.win_ptr, 2, 0, keypress, (void *)&move);
 	mlx_loop(move.mlx_ptr);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   julia.c                                            :+:      :+:    :+:   */
+/*   mandelbrot_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yelousse <yelousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/23 17:27:33 by yelousse          #+#    #+#             */
-/*   Updated: 2022/08/03 15:18:42 by yelousse         ###   ########.fr       */
+/*   Created: 2022/07/23 16:10:51 by yelousse          #+#    #+#             */
+/*   Updated: 2022/08/05 00:04:49 by yelousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,26 @@ int		mouse_move(int x, int y, t_mlx *move)
 	return (0);
 }
 
-void ft_julia(int x, int y, t_mlx *move)
+void ft_mandelbrot_bonus(int x, int y, t_mlx *move)
 {
 	int it;
 	t_complex c, z, t;
-
+	
 	it = 1;
-	c.r = (double)move->mx / (W / (move->re_max - move->re_min)) + move->re_min;
-	c.i = (double)move->my / (H / (move->im_max - move->im_min)) + move->im_min;
-	z.r = move->re_min + (x + move->lr) / (double)W * (move->re_max - move->re_min);
-	z.i = move->im_min + (y + move->ud) / (double)W * (move->im_max - move->im_min);
+	c.r= move->re_min + (x + move->lr) / (double)W * (move->re_max - move->re_min);
+	c.i = move->im_min + (y + move->ud) / (double)W * (move->im_max - move->im_min);
+	z.r = move->re_min + (move->mx + move->lr) / (double)W * (move->re_max - move->re_min);
+	z.i = move->im_min + (move->my + move->ud) / (double)W * (move->im_max - move->im_min);
 	t = z;
-	while (z.r * z.r + z.i * z.i < 4 && it < MAX_IT)
+	while (z.r * z.r + z.i * z.i < 4 && it < move->max_it)
 	{
 		t.r = (z.r * z.r - z.i * z.i + c.r);
 		t.i = (2 * z.r * z.i + c.i);
 		z = t;
 		it++;
 	}
-	if (it == MAX_IT)
+	if (it == move->max_it)
 		move->img_str[y * W + x ] = 0x000000;
 	else
-		move->img_str[y * W + x ] = 0xA0F00F * (it);
+		move->img_str[y * W + x ] =  move->change * it;
 }
