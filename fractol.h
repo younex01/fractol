@@ -6,7 +6,7 @@
 /*   By: yelousse <yelousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 02:07:04 by yelousse          #+#    #+#             */
-/*   Updated: 2022/08/05 00:28:50 by yelousse         ###   ########.fr       */
+/*   Updated: 2022/08/07 02:24:34 by yelousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 # include <stdlib.h>
 # include <math.h>
 
-#define W 800
-#define H 800
-#define MAX_IT 50
+# define W 800
+# define H 800
+# define MAX_IT 1000
 
-typedef	struct s_color
+typedef struct s_color
 {
-	int color;
+	int	color;
 }	t_color;
 
 typedef struct s_complex
@@ -33,22 +33,21 @@ typedef struct s_complex
 	double			i;
 }			t_complex;
 
-typedef struct s_mouse
-{
-	double			Re;
-	double			Im;
-}			mouse;
+// typedef struct s_mouse
+// {
+// 	double			Re;
+// 	double			Im;
+// }			mouse;
 
 typedef struct s_mandel
 {
-	double re_min;
-	double re_max;
-	double im_min;
-	double im_max;
+	double	re_min;
+	double	re_max;
+	double	im_min;
+	double	im_max;
 }			t_mandel;
 
-
-typedef		struct s_mlx
+typedef struct s_mlx
 {
 	int		ud;
 	int		lr;
@@ -61,32 +60,41 @@ typedef		struct s_mlx
 	int		endian;
 	int		mx;
 	int		my;
-	double 	coef;
-	double re_min;
-	double re_max;
-	double im_min;
-	double im_max;
+	double	coef;
+	double	re_min;
+	double	re_max;
+	double	im_min;
+	double	im_max;
 	char	*f;
-	int 	change;
+	int		change;
 	int		i;
-	int 	max_it;
+	int		max_it;
 }t_mlx;
 
-
-void ft_mandelbrot(int x, int y, t_mlx *move);
-void ft_julia_11(int x, int y, t_mlx *move);
-void ft_julia_22(int x, int y, t_mlx *move);
-void ft_julia_33(int x, int y, t_mlx *move);
-void ft_julia_44(int x, int y, t_mlx *move);
-void ft_burningship(int x, int y, t_mlx *move);
-void ft_sierpinski(int x, int y, t_mlx *move);
-void ft_tricorn(int x, int y, t_mlx *move);
-int		mouse_move(int x, int y, t_mlx *move);
+void	ft_mandelbrot(int x, int y, t_mlx *move);
+void	ft_julia_11(int x, int y, t_mlx *move);
+void	ft_julia_22(int x, int y, t_mlx *move);
+void	ft_julia_33(int x, int y, t_mlx *move);
+void	ft_julia_44(int x, int y, t_mlx *move);
 void	ft_draw(t_mlx *move, char *f);
+int		mouse_move(int x, int y, t_mlx *move);
 
-void ft_mandelbrot_bonus(int x, int y, t_mlx *move);
-void ft_julia_bonus(int x, int y, t_mlx *move);
-void ft_burningship_bonus(int x, int y, t_mlx *move);
-void ft_tricorn_bonus(int x, int y, t_mlx *move);
+int		keypress(int keycode, t_mlx *move);
+int		mouse_press(int button, int x, int y, t_mlx *move);
+int		close(void *param);
+int		keypress_bonus(int keycode, t_mlx *move);
+int		mouse_press_bonus(int button, int x, int y, t_mlx *move);
+int		close_bonus(void *param);
+
+void	ft_mandelbrot_bonus(int x, int y, t_mlx *move);
+void	ft_julia_11_bonus(int x, int y, t_mlx *move);
+void	ft_julia_22_bonus(int x, int y, t_mlx *move);
+void	ft_julia_33_bonus(int x, int y, t_mlx *move);
+void	ft_julia_44_bonus(int x, int y, t_mlx *move);
+void	ft_burningship_bonus(int x, int y, t_mlx *move);
+void	ft_tricorn_bonus(int x, int y, t_mlx *move);
+void	change_color(t_mlx *move);
+void	add_iter(t_mlx *move);
+void	reduce_iter(t_mlx *move);
 
 #endif

@@ -1,7 +1,7 @@
 NAME = fractol
-NAME_BONUS = fractol_bonus
-SRC = fractol.c mandelbrot.c julia_11.c julia_22.c julia_33.c julia_44.c burning_ship.c
-SRC_BONUS = fractol_bonus.c mandelbrot_bonus.c julia_bonus.c burning_ship_bonus.c tricorn_bonus.c
+NAME_BONUS = fractol_b
+SRC = fractol.c fractol_utils.c mandelbrot.c julia_11.c julia_22.c julia_33.c julia_44.c
+SRC_BONUS = fractol_bonus.c fractol_utils_bonus.c fractol_helper_bonus.c mandelbrot_bonus.c julia_11_bonus.c julia_22_bonus.c julia_33_bonus.c julia_44_bonus.c burning_ship_bonus.c tricorn_bonus.c
 OBJ = ${SRC:.c=.o}
 OBJ_BONUS = ${SRC_BONUS:.c=.o}
 FLAGS = -Wall -Wextra -Werror
@@ -23,10 +23,9 @@ $(NAME_BONUS): $(OBJ_BONUS)
 	$(CC) $(FLAGS) -c $< -o $@
 
 clean :
-	$(RM) $(OBJ) $(OBJ_BONUS) $(NAME) $(NAME_BONUS)
-
-fclean :
-	$(RM) all
+	$(RM) $(OBJ) $(OBJ_BONUS)
+fclean : clean
+	$(RM) $(NAME) $(NAME_BONUS)
 
 re : fclean all
 

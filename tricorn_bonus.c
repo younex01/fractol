@@ -6,30 +6,26 @@
 /*   By: yelousse <yelousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/31 18:19:48 by yelousse          #+#    #+#             */
-/*   Updated: 2022/08/05 00:09:17 by yelousse         ###   ########.fr       */
+/*   Updated: 2022/08/07 01:33:29 by yelousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-// int		mouse_move(int x, int y, t_mlx *move)
-// {
-// 	move->mx = x;
-// 	move->my = y;
-// 	ft_draw(move, move->f);
-// 	return (0);
-// }
-
-void ft_tricorn_bonus(int x, int y, t_mlx *move)
+void	ft_tricorn_bonus(int x, int y, t_mlx *move)
 {
-	int it;
-	t_complex c, z, t;
+	int			it;
+	t_complex	c;
+	t_complex	z;
+	t_complex	t;
 
 	it = 1;
-	c.r= move->re_min + (x + move->lr) / (double)W * (move->re_max - move->re_min);
-	c.i = move->im_min + (y + move->ud) / (double)W * (move->im_max - move->im_min);
-	z.r = move->re_min + (move->mx + move->lr) / (double)W * (move->re_max - move->re_min);
-	z.i = move->im_min + (move->my + move->ud) / (double)W * (move->im_max - move->im_min);
+	c.r = move->re_min + (x + move->lr)
+		/ (double)W * (move->re_max - move->re_min);
+	c.i = move->im_min + (y + move->ud)
+		/ (double)W * (move->im_max - move->im_min);
+	z.r = 0;
+	z.i = 0;
 	t = z;
 	while (z.r * z.r + z.i * z.i < 4 && it < move->max_it)
 	{
@@ -39,7 +35,7 @@ void ft_tricorn_bonus(int x, int y, t_mlx *move)
 		it++;
 	}
 	if (it == move->max_it)
-		move->img_str[y * W + x ] = 0x000000;
+		move->img_str[y * W + x] = 0x000000;
 	else
-		move->img_str[y * W + x ] = move->change * it;
+		move->img_str[y * W + x] = move->change * it;
 }
