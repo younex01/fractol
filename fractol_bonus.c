@@ -6,7 +6,7 @@
 /*   By: yelousse <yelousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 02:06:24 by yelousse          #+#    #+#             */
-/*   Updated: 2022/08/09 21:59:23 by yelousse         ###   ########.fr       */
+/*   Updated: 2022/08/10 21:14:06 by yelousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,7 @@ void	ft_draw(t_mlx *move, char f)
 			if (f == 'm')
 				ft_mandelbrot_bonus(j, i, move);
 			if (f == 'j')
-				ft_julia_11_bonus(j, i, move);
-			if (f == 'k')
-				ft_julia_22_bonus(j, i, move);
-			if (f == 'l')
-				ft_julia_33_bonus(j, i, move);
-			if (f == 'h')
-				ft_julia_44_bonus(j, i, move);
+				ft_julia_bonus(j, i, move);
 			if (f == 't')
 				ft_tricorn_bonus(j, i, move);
 		}
@@ -54,28 +48,25 @@ void	ft_ini(t_mlx *move)
 	move->i = 0;
 }
 
-void	ft_protect(int ac)
+void	ft_error(void)
 {
-	if (ac == 1 || ac > 2)
-	{
-		write(1, "only available parameters : mandelbrot (m) julia (h) (j) (k) (l) tricorn (t)\
-		\n", 77);
-		exit(0);
-	}
+	write(1, "only available parameters : mandelbrot (m) julia (j)\
+	\n", 65);
+	exit(0);
 }
 
 int	main(int ac, char **av)
 {
 	t_mlx	move;
 
-	ft_protect(ac);
-	if ((av[1][0] != 'm' && av[1][0] != 'j'
-	&& av[1][0] != 'h' && av[1][0] != 'k'
-	&& av[1][0] != 'l' && av[1][0] != 't' ) || av[1][1] != '\0')
+	if (ac == 1 || (ac == 2
+			&& (av[1][0] != 'm' || av[1][0] != 'j')
+		&& av[1][1] != '\0') || (ac != 2 && ac != 4))
+		ft_error();
+	else if (av[1][0] == 'j' && ac == 4)
 	{
-		write(1, "only available parameters : mandelbrot (m) julia (h) (j) (k) (l) tricorn (t)\
-		\n", 77);
-		exit(0);
+		move.c.r = ft_atof(av[2]);
+		move.c.i = ft_atof(av[3]);
 	}
 	move.f = av[1][0];
 	ft_ini(&move);
@@ -86,7 +77,6 @@ int	main(int ac, char **av)
 			&(move.l), &(move.endian));
 	ft_draw(&move, move.f);
 	mlx_hook(move.win_ptr, 4, 0, mouse_press_bonus, &move);
-	mlx_hook(move.win_ptr, 6, 0, mouse_move, &move);
 	mlx_hook(move.win_ptr, 17, 0, close_bonus, (void *)&move);
 	mlx_hook(move.win_ptr, 2, 0, keypress_bonus, (void *)&move);
 	mlx_loop(move.mlx_ptr);

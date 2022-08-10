@@ -6,7 +6,7 @@
 /*   By: yelousse <yelousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 02:06:24 by yelousse          #+#    #+#             */
-/*   Updated: 2022/08/10 01:17:21 by yelousse         ###   ########.fr       */
+/*   Updated: 2022/08/10 21:13:41 by yelousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,7 @@ void	ft_draw(t_mlx *move, char f)
 			if (f == 'm')
 				ft_mandelbrot(j, i, move);
 			if (f == 'j')
-				ft_julia_11(j, i, move);
-			if (f == 'k')
-				ft_julia_22(j, i, move);
-			if (f == 'l')
-				ft_julia_33(j, i, move);
-			if (f == 'h')
-				ft_julia_44(j, i, move);
+				ft_julia(j, i, move);
 			j++;
 		}
 	i++;
@@ -61,22 +55,18 @@ void	ft_error(void)
 	exit(0);
 }
 
-
 int	main(int ac, char **av)
 {
 	t_mlx	move;
 
-	if (ac == 1 || (ac == 2 && av[1][0] != 'm' && av[1][0] != 'j' && av[1][1] != '\0') || av[1][0] != 'j')
+	if (ac == 1 || (ac == 2
+			&& (av[1][0] != 'm' || av[1][0] != 'j')
+		&& av[1][1] != '\0') || (ac != 2 && ac != 4))
 		ft_error();
-	if(av[1][0] != 'j')
-	{
-		
-	}
-	if(av[1][0] == 'j' && ac == 4)
+	else if (av[1][0] == 'j' && ac == 4)
 	{
 		move.c.r = ft_atof(av[2]);
 		move.c.i = ft_atof(av[3]);
-		printf("hello , %f, %f\n",atof(av[2]),atof(av[3]));
 	}
 	move.f = av[1][0];
 	ft_ini(&move);
