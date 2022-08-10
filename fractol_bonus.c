@@ -6,7 +6,7 @@
 /*   By: yelousse <yelousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 02:06:24 by yelousse          #+#    #+#             */
-/*   Updated: 2022/08/10 21:14:06 by yelousse         ###   ########.fr       */
+/*   Updated: 2022/08/10 23:07:11 by yelousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_draw(t_mlx *move, char f)
 
 void	ft_ini(t_mlx *move)
 {
-	move->max_it = 50;
+	move->max_it = 100;
 	move->ud = 0;
 	move->lr = 0;
 	move->re_min = -2;
@@ -46,12 +46,14 @@ void	ft_ini(t_mlx *move)
 	move->coef = 1;
 	move->change = 4147;
 	move->i = 0;
+	move->c.r = 0.0;
+	move->c.i = -0.8;
 }
 
 void	ft_error(void)
 {
-	write(1, "only available parameters : mandelbrot (m) julia (j)\
-	\n", 65);
+	write(1, "only available parameters : mandelbrot (m) julia (j) [Cr & Ci] tricorn (t)\
+	\n", 75);
 	exit(0);
 }
 
@@ -59,9 +61,10 @@ int	main(int ac, char **av)
 {
 	t_mlx	move;
 
-	if (ac == 1 || (ac == 2
-			&& (av[1][0] != 'm' || av[1][0] != 'j')
-		&& av[1][1] != '\0') || (ac != 2 && ac != 4))
+	ft_ini(&move);
+	if (ac == 1 || ((ac == 4 && av[1][0] == 'm' && av[1][0] == 'j')
+		|| (av[1][0] != 'm' && av[1][0] != 'j' && av[1][0] != 't'))
+		|| av[1][1] != '\0' || (ac != 2 && ac != 4))
 		ft_error();
 	else if (av[1][0] == 'j' && ac == 4)
 	{
@@ -69,7 +72,6 @@ int	main(int ac, char **av)
 		move.c.i = ft_atof(av[3]);
 	}
 	move.f = av[1][0];
-	ft_ini(&move);
 	move.mlx_ptr = mlx_init();
 	move.win_ptr = mlx_new_window(move.mlx_ptr, 800, 800, "fractol");
 	move.img_ptr = mlx_new_image(move.mlx_ptr, 800, 800);

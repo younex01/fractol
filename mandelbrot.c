@@ -6,7 +6,7 @@
 /*   By: yelousse <yelousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 16:10:51 by yelousse          #+#    #+#             */
-/*   Updated: 2022/08/07 01:33:44 by yelousse         ###   ########.fr       */
+/*   Updated: 2022/08/10 22:09:54 by yelousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	ft_mandelbrot(int x, int y, t_mlx *move)
 	t_complex	t;
 
 	it = 1;
-	c.r = move->re_min + (x + move->lr)
+	c.r = move->re_min + x
 		/ (double)W * (move->re_max - move->re_min);
-	c.i = move->im_min + (y + move->ud)
+	c.i = move->im_min + y
 		/ (double)W * (move->im_max - move->im_min);
 	z.r = 0.0;
 	z.i = 0.0;

@@ -6,7 +6,7 @@
 /*   By: yelousse <yelousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 17:27:33 by yelousse          #+#    #+#             */
-/*   Updated: 2022/08/10 21:15:59 by yelousse         ###   ########.fr       */
+/*   Updated: 2022/08/10 22:09:10 by yelousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	ft_julia(int x, int y, t_mlx *move)
 	t_complex	t;
 
 	it = 1;
-	z.r = move->re_min + (x + move->lr)
+	z.r = move->re_min + x
 		/ (double)W * (move->re_max - move->re_min);
-	z.i = move->im_min + (y + move->ud)
+	z.i = move->im_min + y
 		/ (double)W * (move->im_max - move->im_min);
 	t = z;
 	while (z.r * z.r + z.i * z.i < 4 && it < move->max_it)

@@ -6,7 +6,7 @@
 /*   By: yelousse <yelousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 02:07:04 by yelousse          #+#    #+#             */
-/*   Updated: 2022/08/10 21:14:28 by yelousse         ###   ########.fr       */
+/*   Updated: 2022/08/10 22:51:55 by yelousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,31 +17,15 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <math.h>
-# include <string.h>
-# include <stdio.h>
 
 # define W 800
 # define H 800
-# define MAX_IT 1000
-
-typedef struct s_color
-{
-	int	color;
-}	t_color;
 
 typedef struct s_complex
 {
 	double			r;
 	double			i;
 }			t_complex;
-
-typedef struct s_mandel
-{
-	double	re_min;
-	double	re_max;
-	double	im_min;
-	double	im_max;
-}			t_mandel;
 
 typedef struct s_mlx
 {
