@@ -6,13 +6,13 @@
 /*   By: yelousse <yelousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 02:06:24 by yelousse          #+#    #+#             */
-/*   Updated: 2022/08/07 02:04:27 by yelousse         ###   ########.fr       */
+/*   Updated: 2022/08/10 01:17:21 by yelousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	ft_draw(t_mlx *move, char *f)
+void	ft_draw(t_mlx *move, char f)
 {
 	int	i;
 	int	j;
@@ -23,15 +23,15 @@ void	ft_draw(t_mlx *move, char *f)
 		j = 0;
 		while (j < W)
 		{
-			if (*f == 'm')
+			if (f == 'm')
 				ft_mandelbrot(j, i, move);
-			if (*f == 'j')
+			if (f == 'j')
 				ft_julia_11(j, i, move);
-			if (*f == 'k')
+			if (f == 'k')
 				ft_julia_22(j, i, move);
-			if (*f == 'l')
+			if (f == 'l')
 				ft_julia_33(j, i, move);
-			if (*f == 'h')
+			if (f == 'h')
 				ft_julia_44(j, i, move);
 			j++;
 		}
@@ -54,29 +54,31 @@ void	ft_ini(t_mlx *move)
 	move->i = 0;
 }
 
-void	ft_protect(int ac)
+void	ft_error(void)
 {
-	if (ac == 1 || ac > 2)
-	{
-		printf("only available parameters : mandelbrot "
-			"(m) julia (h) (j) (k) (l) \n");
-		exit(0);
-	}
+	write(1, "only available parameters : mandelbrot (m) julia (j)\
+	\n", 65);
+	exit(0);
 }
+
 
 int	main(int ac, char **av)
 {
 	t_mlx	move;
 
-	ft_protect(ac);
-	if ((av[1][0] != 'm' && av[1][0] != 'j' && av[1][0] != 'h'
-			&& av[1][0] != 'k' && av[1][0] != 'l') || av[1][1] != '\0')
+	if (ac == 1 || (ac == 2 && av[1][0] != 'm' && av[1][0] != 'j' && av[1][1] != '\0') || av[1][0] != 'j')
+		ft_error();
+	if(av[1][0] != 'j')
 	{
-		printf("only available parameters : mandelbrot (m) "
-			"julia (h) (j) (k) (l)\n");
-		exit(0);
+		
 	}
-	move.f = *(av + (1));
+	if(av[1][0] == 'j' && ac == 4)
+	{
+		move.c.r = ft_atof(av[2]);
+		move.c.i = ft_atof(av[3]);
+		printf("hello , %f, %f\n",atof(av[2]),atof(av[3]));
+	}
+	move.f = av[1][0];
 	ft_ini(&move);
 	move.mlx_ptr = mlx_init();
 	move.win_ptr = mlx_new_window(move.mlx_ptr, 800, 800, "fractol");
@@ -85,7 +87,7 @@ int	main(int ac, char **av)
 			&(move.bpp), &(move.l), &(move.endian));
 	ft_draw(&move, move.f);
 	mlx_hook(move.win_ptr, 4, 0, mouse_press, &move);
-	mlx_hook(move.win_ptr, 17, 0, close, (void *)&move);
+	mlx_hook(move.win_ptr, 17, 0, ft_close, (void *)&move);
 	mlx_hook(move.win_ptr, 2, 0, keypress, (void *)&move);
 	mlx_loop(move.mlx_ptr);
 }

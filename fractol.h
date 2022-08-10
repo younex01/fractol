@@ -6,7 +6,7 @@
 /*   By: yelousse <yelousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 02:07:04 by yelousse          #+#    #+#             */
-/*   Updated: 2022/08/07 02:24:34 by yelousse         ###   ########.fr       */
+/*   Updated: 2022/08/10 01:11:18 by yelousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 # define FRACTOL_H
 
 # include <mlx.h>
-# include <stdio.h>
+# include <unistd.h>
 # include <stdlib.h>
 # include <math.h>
+# include <string.h>
+# include <stdio.h>
 
 # define W 800
 # define H 800
@@ -32,12 +34,6 @@ typedef struct s_complex
 	double			r;
 	double			i;
 }			t_complex;
-
-// typedef struct s_mouse
-// {
-// 	double			Re;
-// 	double			Im;
-// }			mouse;
 
 typedef struct s_mandel
 {
@@ -65,10 +61,11 @@ typedef struct s_mlx
 	double	re_max;
 	double	im_min;
 	double	im_max;
-	char	*f;
+	char	f;
 	int		change;
 	int		i;
 	int		max_it;
+	t_complex	c;
 }t_mlx;
 
 void	ft_mandelbrot(int x, int y, t_mlx *move);
@@ -76,12 +73,12 @@ void	ft_julia_11(int x, int y, t_mlx *move);
 void	ft_julia_22(int x, int y, t_mlx *move);
 void	ft_julia_33(int x, int y, t_mlx *move);
 void	ft_julia_44(int x, int y, t_mlx *move);
-void	ft_draw(t_mlx *move, char *f);
+void	ft_draw(t_mlx *move, char f);
 int		mouse_move(int x, int y, t_mlx *move);
 
 int		keypress(int keycode, t_mlx *move);
 int		mouse_press(int button, int x, int y, t_mlx *move);
-int		close(void *param);
+int		ft_close(void *param);
 int		keypress_bonus(int keycode, t_mlx *move);
 int		mouse_press_bonus(int button, int x, int y, t_mlx *move);
 int		close_bonus(void *param);
@@ -91,10 +88,10 @@ void	ft_julia_11_bonus(int x, int y, t_mlx *move);
 void	ft_julia_22_bonus(int x, int y, t_mlx *move);
 void	ft_julia_33_bonus(int x, int y, t_mlx *move);
 void	ft_julia_44_bonus(int x, int y, t_mlx *move);
-void	ft_burningship_bonus(int x, int y, t_mlx *move);
 void	ft_tricorn_bonus(int x, int y, t_mlx *move);
 void	change_color(t_mlx *move);
 void	add_iter(t_mlx *move);
 void	reduce_iter(t_mlx *move);
+double	ft_atof(char *str);
 
 #endif

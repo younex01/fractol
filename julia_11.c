@@ -6,7 +6,7 @@
 /*   By: yelousse <yelousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 17:27:33 by yelousse          #+#    #+#             */
-/*   Updated: 2022/08/07 01:35:03 by yelousse         ###   ########.fr       */
+/*   Updated: 2022/08/09 23:36:59 by yelousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,12 @@
 void	ft_julia_11(int x, int y, t_mlx *move)
 {
 	int			it;
-	t_complex	c;
 	t_complex	z;
 	t_complex	t;
 
 	it = 1;
-	c.r = 0;
-	c.i = -0.8;
+	// move->c.r = 0;
+	// move->c.i = -0.8;
 	z.r = move->re_min + (x + move->lr)
 		/ (double)W * (move->re_max - move->re_min);
 	z.i = move->im_min + (y + move->ud)
@@ -29,8 +28,8 @@ void	ft_julia_11(int x, int y, t_mlx *move)
 	t = z;
 	while (z.r * z.r + z.i * z.i < 4 && it < move->max_it)
 	{
-		t.r = (z.r * z.r - z.i * z.i + c.r);
-		t.i = (2 * z.r * z.i + c.i);
+		t.r = (z.r * z.r - z.i * z.i + move->c.r);
+		t.i = (2 * z.r * z.i + move->c.i);
 		z = t;
 		it++;
 	}

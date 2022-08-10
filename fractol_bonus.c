@@ -6,13 +6,13 @@
 /*   By: yelousse <yelousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 02:06:24 by yelousse          #+#    #+#             */
-/*   Updated: 2022/08/07 02:23:14 by yelousse         ###   ########.fr       */
+/*   Updated: 2022/08/09 21:59:23 by yelousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	ft_draw(t_mlx *move, char *f)
+void	ft_draw(t_mlx *move, char f)
 {
 	int	i;
 	int	j;
@@ -23,17 +23,17 @@ void	ft_draw(t_mlx *move, char *f)
 		j = -1;
 		while (++j < W)
 		{
-			if (*f == 'm')
+			if (f == 'm')
 				ft_mandelbrot_bonus(j, i, move);
-			if (*f == 'j')
+			if (f == 'j')
 				ft_julia_11_bonus(j, i, move);
-			if (*f == 'k')
+			if (f == 'k')
 				ft_julia_22_bonus(j, i, move);
-			if (*f == 'l')
+			if (f == 'l')
 				ft_julia_33_bonus(j, i, move);
-			if (*f == 'h')
+			if (f == 'h')
 				ft_julia_44_bonus(j, i, move);
-			if (*f == 't')
+			if (f == 't')
 				ft_tricorn_bonus(j, i, move);
 		}
 	}
@@ -58,8 +58,8 @@ void	ft_protect(int ac)
 {
 	if (ac == 1 || ac > 2)
 	{
-		printf("only available parameters : mandelbrot (m) "
-			"julia (h) (j) (k) (l) (b)\n");
+		write(1, "only available parameters : mandelbrot (m) julia (h) (j) (k) (l) tricorn (t)\
+		\n", 77);
 		exit(0);
 	}
 }
@@ -71,14 +71,13 @@ int	main(int ac, char **av)
 	ft_protect(ac);
 	if ((av[1][0] != 'm' && av[1][0] != 'j'
 	&& av[1][0] != 'h' && av[1][0] != 'k'
-	&& av[1][0] != 'l' && av[1][0] != 'b'
-	&& av[1][0] != 't' ) || av[1][1] != '\0')
+	&& av[1][0] != 'l' && av[1][0] != 't' ) || av[1][1] != '\0')
 	{
-		printf("only available parameters : mandelbrot (m) \
-		julia (h) (j) (k) (l) burning ship(b) tricorn(t)\n");
+		write(1, "only available parameters : mandelbrot (m) julia (h) (j) (k) (l) tricorn (t)\
+		\n", 77);
 		exit(0);
 	}
-	move.f = *(av + (1));
+	move.f = av[1][0];
 	ft_ini(&move);
 	move.mlx_ptr = mlx_init();
 	move.win_ptr = mlx_new_window(move.mlx_ptr, 800, 800, "fractol");

@@ -6,7 +6,7 @@
 /*   By: yelousse <yelousse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 01:54:33 by yelousse          #+#    #+#             */
-/*   Updated: 2022/08/07 01:58:43 by yelousse         ###   ########.fr       */
+/*   Updated: 2022/08/09 21:54:18 by yelousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	keypress(int keycode, t_mlx *move)
 	return (0);
 }
 
-int	close(void *param)
+int	ft_close(void *param)
 {
 	(void)param;
 	exit(0);
